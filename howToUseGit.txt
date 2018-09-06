@@ -1,7 +1,43 @@
-关联远程:
+下载git：
+https://git-scm.com/downloads
+安装好后开始菜单里找到“Git”->“Git Bash”
+
+在bash里面输入
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
+通过git init命令把这个目录变成Git可以管理的仓库，此时会生成.git的目录
+添加文件到Git仓库，分两步：
+使用命令git add <file>，注意，可反复多次使用，添加多个文件；
+使用命令git commit -m <message>，完成。
+git status： 查看工作区状态
+git diff： 查看修改内容
+git log： 查看提交历史
+git reset --hard commit_id： 回退到某个版本
+git diff HEAD -- <filename>：查看工作区和版本库里面最新版本的区别
+git checkout -- <filename>: 减出文件，没有 -- 变成了切换分支
+git rm <filename>： 删除一个文件
+
+远程仓库搭建：
+第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+$ ssh-keygen -t rsa -C "youremail@example.com"
+你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可
+
+第2步：登陆GitHub，打开Settings-SSH and GPG Keys页面：
+然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
+
+添加远程库：点击github右上角"+"号-New Repository，输入名称，勾选initialize，然后Creat即可。
+
+本地仓库关联远程仓库:
 git remote add origin https://github.com/Neojan/Jangit.git
-push command: git push -u origin master
-Locol clone remote: git clone https://github.com/Neojan/Blog.git
+
+把本地库的所有内容推送到远程库上: 
+git push -u origin master
+我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+
+从远程仓库克隆到本地：
+git clone https://github.com/Neojan/Blog.git
+
 branch: 
 git checkout命令加上-b参数表示创建并切换
 git checkout -b xxx 
