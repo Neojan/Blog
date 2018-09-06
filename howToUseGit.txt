@@ -1,4 +1,13 @@
-If need combine a remote git, use the command like:
+关联远程:
 git remote add origin https://github.com/Neojan/Jangit.git
 push command: git push -u origin master
 Locol clone remote: git clone https://github.com/Neojan/Blog.git
+branch: 
+git checkout命令加上-b参数表示创建并切换
+git checkout -b xxx 
+查看分支：git branch
+创建分支：git branch <name>
+切换分支：git checkout <name>
+创建+切换分支：git checkout -b <name>
+合并某分支到当前分支：git merge <name>
+删除分支：git branch -d <name>
