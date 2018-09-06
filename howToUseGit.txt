@@ -1,0 +1,4 @@
+If need combine a remote git, use the command like:
+git remote add origin https://github.com/Neojan/Jangit.git
+push command: git push -u origin master
+Locol clone remote: git clone https://github.com/Neojan/Blog.git
