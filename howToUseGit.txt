@@ -43,6 +43,9 @@ git push origin master：origin为远程库，master为本地主分支，master�
 从远程仓库克隆到本地：（可以选择ssh和https）
 git clone https://github.com/Neojan/Blog.git 或 git@github.com:Neojan/Blog.git
 
+在本地创建和远程分支对应的分支:
+git checkout -b branch-name origin/branch-name
+
 branch: 
 git checkout命令加上-b参数表示创建并切换
 git checkout -b xxx 
