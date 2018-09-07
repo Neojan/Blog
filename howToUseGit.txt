@@ -12,7 +12,7 @@ $ git config --global user.email "email@example.com"
 使用命令git commit -m <message>，完成。
 git status： 查看工作区状态
 git diff： 查看修改内容
-git log： 查看提交历史 一些参数 git log --graph --pretty=oneline --abbrev-commit
+git log： 查看提交历史 一些参数 git log --graph --pretty=oneline --abbrev-commit, -n:n是次数
 git reset --hard commit_id： 回退到某个版本
 git diff HEAD -- <filename>：查看工作区和版本库里面最新版本的区别
 git checkout -- <filename>: 减出文件，没有 -- 变成了切换分支
@@ -48,7 +48,7 @@ git checkout -b branch-name origin/branch-name
 
 branch: 
 git checkout命令加上-b参数表示创建并切换
-git checkout -b xxx 
+git checkout -b <name> 
 查看分支：git branch
 创建分支：git branch <name>
 切换分支：git checkout <name>
@@ -78,4 +78,26 @@ git stash drop：删除一个存储的进度。默认删除最新。
 git stash pop = git stash apply + git stash drop。
 git stash clear：删除所有进度记录
 
+git rebase
+rebase操作可以把本地未push的分叉提交历史整理成直线；
+rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
 
+git tag <name>：在当前提交前打标签
+git tag <tagname> <commit id>:给某次提交加标签
+git tag -a <tagname> -m "blablabla...":指定标签信息
+git show <tagname>：查看tag说明
+git tag -d <tagname>：删除标签
+
+.gitignore：忽略文件规则文件 https://github.com/github/gitignore
+
+别名：
+git config --global alias.<别名> <原名>
+如：
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+每个仓库的Git配置文件都放在.git/config文件中,如果删除可以进配置文件删除
+
+参考：
+https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
