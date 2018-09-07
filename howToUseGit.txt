@@ -30,10 +30,15 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 
 本地仓库关联远程仓库:（可以选择ssh和https）
 git remote add origin https://github.com/Neojan/Jangit.git 或 git@github.com:Neojan/Blog.git
+查看远程库信息：git remote -v。可以看到push pull地址
+
+从远程库合并更新到本地：
+git pull
 
 把本地库的所有内容推送到远程库上: 
 git push -u origin master
 我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+git push origin master：origin为远程库，master为本地主分支，master换成其他就将其他分支push上去。push之前最好先pull以下。
 
 从远程仓库克隆到本地：（可以选择ssh和https）
 git clone https://github.com/Neojan/Blog.git 或 git@github.com:Neojan/Blog.git
