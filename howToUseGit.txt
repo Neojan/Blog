@@ -56,4 +56,17 @@ git merge –no-ff <name>
 如日志commit 42bd579e9d1884acf43cd67bccd47441b006b7fa (dev)
 –no-ff，其作用是：要求git merge即使在fast forward条件下也要产生一个新的merge commit。此处，要求采用–no-ff的方式进行分支合并，其目的在于，希望保持原有“develop branches”整个提交链的完整性。
 
+git 临时切换branch
+加入当前branch有内容未提交，但需要到其他分支修改bug，如果此时切换branch，git会提示
+error: Your local changes to the following files would be overwritten by checkout:
+        xxxx
+Please commit your changes or stash them before you switch branches.
+这时候就需要使用 git stash 保存当前branch 修改进度。此时用git status看是没有改动了，就可以正常切换到其他branch，在其他branch操作完，切回来之后，
+git stash list ：查看存储的进度列表。
+git stash pop [–index] [stash_id]：恢复之前的进度。不带参数默认恢复最新
+git stash apply [–index] [stash_id]：不删除之前的进度记录并恢复之前的进度，此时查看进度列表仍有记录。
+git stash drop：删除一个存储的进度。默认删除最新。
+git stash pop = git stash apply + git stash drop。
+git stash clear：删除所有进度记录
+
 
