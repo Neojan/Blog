@@ -46,7 +46,8 @@ git checkout -b xxx
 切换分支：git checkout <name>
 创建+切换分支：git checkout -b <name>
 合并某分支到当前分支：git merge <name>
-删除分支：git branch -d <name>，在当前branch无法删除当前branch
+删除分支：git branch -d <name>，在当前branch无法删除当前branch,
+强行删除未合并的分支：git branch -D <name>。
 
 合并的Fast-Forward模式
 当前分支合并到另一分支时，如果没有分歧解决，就会直接移动文件指针。这个过程叫做fastforward。这样合并不会保留分支修改记录信息。git默认采用这种方式
