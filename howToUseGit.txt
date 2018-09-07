@@ -12,7 +12,7 @@ $ git config --global user.email "email@example.com"
 使用命令git commit -m <message>，完成。
 git status： 查看工作区状态
 git diff： 查看修改内容
-git log： 查看提交历史
+git log： 查看提交历史 一些参数 git log --graph --pretty=oneline --abbrev-commit
 git reset --hard commit_id： 回退到某个版本
 git diff HEAD -- <filename>：查看工作区和版本库里面最新版本的区别
 git checkout -- <filename>: 减出文件，没有 -- 变成了切换分支
