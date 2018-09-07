@@ -28,15 +28,15 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 
 添加远程库：点击github右上角"+"号-New Repository，输入名称，勾选initialize，然后Creat即可。
 
-本地仓库关联远程仓库:
-git remote add origin https://github.com/Neojan/Jangit.git
+本地仓库关联远程仓库:（可以选择ssh和https）
+git remote add origin https://github.com/Neojan/Jangit.git 或 git@github.com:Neojan/Blog.git
 
 把本地库的所有内容推送到远程库上: 
 git push -u origin master
 我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
 
-从远程仓库克隆到本地：
-git clone https://github.com/Neojan/Blog.git
+从远程仓库克隆到本地：（可以选择ssh和https）
+git clone https://github.com/Neojan/Blog.git 或 git@github.com:Neojan/Blog.git
 
 branch: 
 git checkout命令加上-b参数表示创建并切换
