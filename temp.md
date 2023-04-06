@@ -1,8 +1,44 @@
-添加 iptables 限制后， tcpdump 是否能抓到包 ，这要看添加的 iptables 限制条件：
+## 实战 - TCP 半连接队列溢出
 
-如果添加的是 INPUT 规则，则可以抓得到包
-如果添加的是 OUTPUT 规则，则抓不到包
-网络包进入主机后的顺序如下：
+> 如何查看 TCP 半连接队列长度？
 
-进来的顺序 Wire -> NIC -> tcpdump -> netfilter/iptables
-出去的顺序 iptables -> tcpdump -> NIC -> Wire
+很遗憾，TCP 半连接队列长度的长度，没有像全连接队列那样可以用 ss 命令查看。
+
+但是我们可以抓住 TCP 半连接的特点，就是服务端处于 `SYN_RECV` 状态的 TCP 连接，就是 TCP 半连接队列。
+
+于是，我们可以使用如下命令计算当前 TCP 半连接队列长度：
+
+```shell
+netstat -natp | grep SYN_RECV | wc -l
+```
+
+> 如何模拟 TCP 半连接队列溢出场景？
+
+模拟 TCP 半连接溢出场景不难，实际上就是对服务端一直发送 TCP SYN 包，但是不回第三次握手 ACK，这样就会使得服务端有大量的处于 `SYN_RECV` 状态的 TCP 连接。
+
+这其实也就是所谓的 SYN 洪泛、SYN 攻击、DDos 攻击。
+
+通过 netstat -s 观察半连接队列溢出的情况：
+```shell
+netstat -s | grep "SYNs to LISTEN"
+```
+
+上面输出的数值是累计值，表示共有多少个 TCP 连接因为半连接队列溢出而被丢弃。隔几秒执行几次，如果有上升的趋势，说明当前存在半连接队列溢出的现象。
+
+> 大部分人都说 tcp_max_syn_backlog 是指定半连接队列的大小，是真的吗？ --- 不是
+
+1. **如果半连接队列满了，并且没有开启 tcp_syncookies，则会丢弃；**
+2. **若全连接队列满了，且没有重传 SYN+ACK 包的连接请求多于 1 个，则会丢弃；**
+3. **如果没有开启 tcp_syncookies，并且 max_syn_backlog 减去 当前半连接队列长度小于 (max_syn_backlog >> 2)，则会丢弃；**
+
+**开启 syncookies 功能就可以在不使用 SYN 半连接队列的情况下成功建立连接**，在前面我们源码分析也可以看到这点，当开启了  syncookies 功能就不会丢弃连接。
+
+syncookies 是这么做的：服务器根据当前状态计算出一个值，放在己方发出的 SYN+ACK 报文中发出，当客户端返回 ACK 报文时，取出该值验证，如果合法，就认为连接建立成功
+
+syncookies 参数主要有以下三个值：
+
+- 0 值，表示关闭该功能；
+- 1 值，表示仅当 SYN 半连接队列放不下时，再启用它；
+- 2 值，表示无条件开启功能；
+
+那么在应对 SYN 攻击时，只需要设置为 1 即可：
