@@ -103,3 +103,6 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 参考：
 https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+
+### git:如何忽略所有存在的未跟踪文件？
+git status --porcelain | grep '^??' | cut -c4- >> .gitignore
