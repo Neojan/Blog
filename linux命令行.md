@@ -105,6 +105,7 @@ A    Global absolute 符号。
 a    Local absolute 符号。
 B    Global bss 符号。
 b    Local bss 符号。
+C    Common symbol，未初始化数据段，该符号没有包含于一个普通section中。只有在链接过程中才进行分配。符号的值表示该符号需要的字节数。例如在一个c文件中，定义int test，并且该符号在别的地方会被引用，则该符号类型即为C。否则其类型为B
 D    Global data 符号。
 d    Local data 符号。
 f    源文件名称符号。
@@ -113,6 +114,10 @@ t    Local text 符号。
 U    未定义符号。 absolute符号的值是绝对值，并且在进一步链接过程中不会被改变
 
 `nm -A *.so | grep 函数名`：查看存在符号表的动态库
+查看.data 节数据 : `nm --format=sysv yourlib | grep -w .data`
+查看.bss 节数据 : `nm --format=sysv yourlib | grep -w .bss`
+
+[nm(1) — Linux manual page](https://www.man7.org/linux/man-pages/man1/nm.1.html)
 
 ## gcc
 
