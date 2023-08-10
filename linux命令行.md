@@ -80,18 +80,22 @@ svn导出目录：`svn co 目录路径 指定版本 -r `
 -x或--extract或--get 从备份文件中还原文件。解压。
 -z或--gzip或--ungzip 通过gzip指令处理备份文件。有gzip属性的。
 -f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。
+
 ### 解压
 `tar  -zxvf   test.tar.gz`
 `tar -zxvf test.tar.gz`
 `tar  -xf test.tar.lzma`
+
 ### 压缩
 `tar  -czvf   test.tar.gz   testDirec`
 `tar -cf test.tar testDirec`
 `lzma -f test.tar`
 
 ### gz
+
 解压1：`gunzip FileName.gz`
 解压2：`gzip -d FileName.gz`
+
 ## readelf
 
 readelf命令，一般用于查看ELF格式的文件信息，常见的文件如在Linux上的可执行文件，动态库(*.so)或者静态库(*.a) 等包含ELF格式的文件。
@@ -114,7 +118,9 @@ t    Local text 符号。
 U    未定义符号。 absolute符号的值是绝对值，并且在进一步链接过程中不会被改变
 
 `nm -A *.so | grep 函数名`：查看存在符号表的动态库
+
 查看.data 节数据 : `nm --format=sysv yourlib | grep -w .data`
+
 查看.bss 节数据 : `nm --format=sysv yourlib | grep -w .bss`
 
 [nm(1) — Linux manual page](https://www.man7.org/linux/man-pages/man1/nm.1.html)
