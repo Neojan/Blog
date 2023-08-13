@@ -24,12 +24,14 @@ svn导出目录：`svn co 目录路径 指定版本 -r `
 `svn propset svn:executable on filename`, `svn commit`
 
 ### 一次性从svn库删除/添加文件
+
 `svn st | awk '{if ($1 == "?") {print $2} }' | xargs svn add`
 `svn st | awk '{if ($1 == "!") {print $2}}' | xargs svn rm `
 
 ## vim
 
 ### 常用vim命令
+
 - yy 拷贝当前行
 - nyy 拷贝当前后开始的n行，比如2yy拷贝当前行及其下一行。
 - p  在当前光标后粘贴,如果之前使用了yy命令来复制一行，那么就在当前行的下一行粘贴。
@@ -43,6 +45,7 @@ svn导出目录：`svn co 目录路径 指定版本 -r `
 
 
 ### 移动
+
 - h 左移一个字符
 - l 右移一个字符，这个命令很少用，一般用w代替。
 - k 上移一个字符
@@ -76,17 +79,23 @@ svn导出目录：`svn co 目录路径 指定版本 -r `
 ## tar
 
 -c或--create 建立新的备份文件，压缩
+
 -v或--verbose 显示指令执行过程。
+
 -x或--extract或--get 从备份文件中还原文件。解压。
+
 -z或--gzip或--ungzip 通过gzip指令处理备份文件。有gzip属性的。
+
 -f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。
 
 ### 解压
+
 `tar  -zxvf   test.tar.gz`
 `tar -zxvf test.tar.gz`
 `tar  -xf test.tar.lzma`
 
 ### 压缩
+
 `tar  -czvf   test.tar.gz   testDirec`
 `tar -cf test.tar testDirec`
 `lzma -f test.tar`
@@ -105,17 +114,17 @@ readelf命令，一般用于查看ELF格式的文件信息，常见的文件如�
 ## nm
 
  `nm -D x.so`
-A    Global absolute 符号。
-a    Local absolute 符号。
-B    Global bss 符号。
-b    Local bss 符号。
-C    Common symbol，未初始化数据段，该符号没有包含于一个普通section中。只有在链接过程中才进行分配。符号的值表示该符号需要的字节数。例如在一个c文件中，定义int test，并且该符号在别的地方会被引用，则该符号类型即为C。否则其类型为B
-D    Global data 符号。
-d    Local data 符号。
-f    源文件名称符号。
-T    Global text 符号。
-t    Local text 符号。
-U    未定义符号。 absolute符号的值是绝对值，并且在进一步链接过程中不会被改变
+- A    Global absolute 符号。
+- a    Local absolute 符号。
+- B    Global bss 符号。
+- b    Local bss 符号。
+- C    Common symbol，未初始化数据段，该符号没有包含于一个普通section中。只有在链接过程中才进行分配。符号的值表示该符号需要的字节数。例如在一个c文件中，定义int test，并且该符号在别的地方会被引用，则该符号类型即为C。否则其类型为B
+- D    Global data 符号。
+- d    Local data 符号。
+- f    源文件名称符号。
+- T    Global text 符号。
+- t-     Local text 符号。
+- U    未定义符号。 absolute符号的值是绝对值，并且在进一步链接过程中不会被改变
 
 `nm -A *.so | grep 函数名`：查看存在符号表的动态库
 
@@ -166,11 +175,11 @@ find . -name filename
 sed -i "s/\bold\b/new/g" `grep old -rl . -nr`  #b为边界匹配
 ```
 ### awk
+
 ```shell
 awk '/要筛选的字符串/{print}' 要筛选的文件
 awk -F '/' '{print $2}' 以/为分割
 ```
-
 
 ## 正则表达式
 
