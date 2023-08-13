@@ -1,6 +1,0 @@
-发送SIP INFO消息Asterisk服务器经常返回415 Unsupported media type，
-查看源码（chan_sip.c handle_request_info函数）发现Asterisk只接收以下Content-Type
-	/* Need to check the media/type */
-	if (!strcasecmp(c, "application/dtmf-relay") ||
-	    !strcasecmp(c, "application/vnd.nortelnetworks.digits") ||
-	    !strcasecmp(c, "application/dtmf"))
