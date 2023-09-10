@@ -160,3 +160,26 @@ void fun() {
 ## cpp测试工具链
 
 用现代C++测试工具链：doctest+FakeIt+nanobench, 可以完美地替代gtest/gmock和google bench，没有任何依赖，无需安装，直接包含头文件就可以用，非常容易集成和使用，是时候抛弃google test和google bench了!
+
+## constexpr
+
+constexpr即常量表达式，重点在表达式字段，用于指定变量或函数可以在常量表达式中使用，可以(或者说一定)在编译时求值的表达式，而const则为了约束变量的访问控制，表示运行时不可以直接被修改，其往往可以在编译期和运行时进行初始化。
+
+前面提到了constexpr是在编译阶段进行求值，那么也就是说在程序运行之前，就已经计算完成，这种无疑大大提升了程序的运行效率。因此提升运行效率就是C++11引入constexpr说明符的目的，也就是说能在编译阶段做的事情就绝不放在运行期做。
+
+```cpp
+constexpr int val = 1 + 2;
+// 等价与
+const int val = 1 + 2;
+// 等价于
+constexpr int Add(const int a, const int b) {
+    return a + b;
+}
+
+int main() {
+    const int val = Add(1, 2);
+    return 0;
+}
+```
+
+C++17起，引入了if constexpr语句
