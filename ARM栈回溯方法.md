@@ -18,7 +18,7 @@
     *   `(caller_address)` 指定了与这个操作数对应的 C 变量是 `caller_address`。
 
 
-使用：
+使用（检查内存泄漏）：
 
 ```c
 void* __attribute__((weak)) __wrap_malloc(size_t size)
@@ -36,3 +36,5 @@ void* __attribute__((weak)) __wrap_malloc(size_t size)
     return addr;
 }
 ```
+
+其他，检查死锁也可以用此方法对`pthread_mutex_lock`,`pthread_mutex_unlock`打桩，记录栈回溯，比如可以记录线程创建加锁时间，超过某一阈值，就可以把线程名称，栈回溯打印出来
